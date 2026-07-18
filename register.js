@@ -1,56 +1,46 @@
-const regForm = document.querySelector('.register');
+const webAppUrl = "https://script.google.com/macros/s/AKfycbwUG_oWP5gE-LWlxMiw58beVQbEUAgVVVUFqY7QIawn86iJ8ZJE4lCNBCEgsYj9soc/exec";
+const adminNumber = "2348109328490";
 
-regForm.addEventListener('submit', function(event) {
+regForm.addEventListener('submit', (e) => {
+    e.preventDefault();
+    submitBtn.innerText = "Submitting...";
     
-    event.preventDefault();
 
-    const fullName = document.getElementById('fullName').value.trim();
-    const phoneNumber = document.getElementById('phoneNumber').value.trim();
-    const emailAddress = document.getElementById('emailAddress').value.trim();
-    const assemblyDistrict = document.getElementById('assemblyDistrict').value.trim();
-    const expectations = document.getElementById('expectations').value.trim();
-    
-    const submitBtn = regForm.querySelector('.submit-btn');
-    submitBtn.innerText = "Processing...";
-    
     const formData = {
-        name: fullName,
-        phone: phoneNumber,
-        email: emailAddress,
-        district: assemblyDistrict,
-        expectations: expectations
+        name: fullName.value,
+        phone: phoneNumber.value,
+        email: emailAddress.value,
+        assembly: assembly.value,
+        district: district.value,
+        expectations: expectations.value
     };
-
     
-    fetch('https://script.google.com/macros/s/AKfycbyY6wfcXoJ_dY_6q8NqYB3JibbIU1NFOdv1xdyzF6k-VAIBFtEVwSpXmhh6vHJju7Hz/exec', {
+    
+    fetch(webAppUrl, {
         method: 'POST',
-        mode: 'no-cors',
-        headers: {
-            'Content-Type': 'application/json'
-        },
         body: JSON.stringify(formData)
     })
+    .then(response => response.json())
     .then(() => {
         
-        const rawMessage = `AOYC '26 Registration Details:\n\n` +
-                           `• Name: ${fullName}\n` +
-                           `• Phone: ${phoneNumber}\n` +
-                           `• Email: ${emailAddress}\n` +
-                           `• Assembly/District: ${assemblyDistrict}\n` +
-                           `• Expectations: ${expectations}`;
-                           
-        const groupCode = "https://chat.whatsapp.com/JyF7AmlcULFKetoCdUzRgS?s=cl&p=a&ilr=0"; 
-    
-        alert("Registration saved to database! Opening the AOYC group chat now...");
-    
-        window.open(groupCode, '_blank');
-
+        const rawMessage = `🙌 *NEW AOYC '26 REGISTRATION*\n\n` +
+                           `• *Name:* ${formData.name}\n` +
+                           `• *Phone:* ${formData.phone}\n` +
+                           `• *Email:* ${formData.email}\n` +
+                           `• *Assembly:* ${formData.assembly}\n` +
+                           `• *District:* ${formData.district}\n` +
+                           `• *Expectations:* ${formData.expectations}`;
+        
+        const whatsappURL = `https://wa.me/${adminNumber}?text=${encodeURIComponent(rawMessage)}`;
+        
+        alert("Registration saved! WhatsApp will open. Tap 'Send' to notify us.");
+        window.open(whatsappURL, '_blank'); 
+        
         submitBtn.innerText = "Complete Registration";
         regForm.reset();
     })
     .catch(error => {
-        console.error('Submission failed:', error);
+        alert("Error saving. Please try again.");
         submitBtn.innerText = "Complete Registration";
-        alert("Something went wrong. Please check your connection and try again.");
     });
 });

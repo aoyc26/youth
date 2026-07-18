@@ -40,11 +40,10 @@ regForm.addEventListener('submit', function(event) {
                            `• Expectations: ${expectations}`;
                            
         const groupCode = "https://chat.whatsapp.com/JyF7AmlcULFKetoCdUzRgS?s=cl&p=a&ilr=0"; 
-        const groupLink = `https://chat.whatsapp.com/` + groupCode;
     
         alert("Registration saved to database! Opening the AOYC group chat now...");
     
-        window.open(groupLink, '_blank');
+        window.open(groupCode, '_blank');
 
         submitBtn.innerText = "Complete Registration";
         regForm.reset();

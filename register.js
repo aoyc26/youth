@@ -44,34 +44,30 @@ regForm.addEventListener("submit", async (e) => {
             body: JSON.stringify(formData)
         });
 
-        // 2. Unicode escape mapping for clean cross-platform rendering
-        const iconRaisingHands = "\u{1F64C}"; // 🙌
-        const iconUser = "\u{1F464}";         // 👤
-        const iconPhone = "\u{1F4DE}";        // 📞
-        const iconEmail = "\u{1F327}";        // 📧
-        const iconBuilding = "\u{1F3DB}";     // 🏛
-        const iconGlobe = "\u{1F30D}";        // 🌍
-        const iconBed = "\u{1F6CF}";          // 🛏
-        const iconThought = "\u{1F4AD}";      // 💭
+        // 2. Format WhatsApp Message
+        const message = 
+`🙌 *NEW AOYC '26 REGISTRATION*
 
-        // 3. Construct message with explicit newline (\n) characters
-        const rawMessage = 
-            iconRaisingHands + " *NEW AOYC '26 REGISTRATION*\n\n" +
-            iconUser + " *Name:* " + formData.name + "\n" +
-            iconPhone + " *Phone:* " + formData.phone + "\n" +
-            iconEmail + " *Email:* " + formData.email + "\n" +
-            iconBuilding + " *Assembly:* " + formData.assembly + "\n" +
-            iconGlobe + " *District:* " + formData.district + "\n" +
-            iconBed + " *Sleepovers:* " + formData.sleepovers + "\n\n" +
-            iconThought + " *Expectations:*\n" + formData.expectations;
+👤 Name: ${formData.name}
+📞 Phone: ${formData.phone}
+📧 Email: ${formData.email}
+🏛 Assembly: ${formData.assembly}
+🌍 District: ${formData.district}
+🛏 Sleepovers: ${formData.sleepovers}
 
-        // 4. Safely encode URL query parameter
-        const encodedMessage = encodeURIComponent(rawMessage);
+💭 Expectations:
+${formData.expectations}`;
 
-        alert("Registration Successful! WhatsApp will open now.");
+        // 3. Encode message safely
+        const encodedMessage = encodeURIComponent(message);
+        
+        // Use standard wa.me link with &text= for maximum mobile compatibility
+        const whatsappURL = `https://wa.me/${adminNumber}?text=${encodedMessage}`;
 
-        // 5. Open WhatsApp using window.location.href
-        window.location.href = `https://wa.me/${adminNumber}?text=${encodedMessage}`;
+        alert("Registration Successful! Opening WhatsApp to notify admin...");
+
+        // 4. Direct redirection (bypasses popup blocker completely)
+        window.location.href = whatsappURL;
 
         regForm.reset();
 

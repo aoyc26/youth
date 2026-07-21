@@ -30,11 +30,7 @@
         <div class="navs">
             <ul>
                 <li>
-                    <a href="index.html">HOME</a>
-                </li>
-                
-                <li>
-                    <a href="">E-MANUAL</a>
+                    <a href="index.html">BACK TO HOME</a>
                 </li>
             </ul>
         </div>
@@ -69,12 +65,28 @@
                     <input id="assembly" type="text" required placeholder="Enter your assembly">
                 </div>
                 <div class="input-group-row">
-                    <label>DISTRICT*</label>
-                    <input id="district" type="text" required placeholder="Enter your district">
+                    <label>SELECT YOUR DISTRICT*</label>
+                    <select id="district">
+                        <option value="ATAN-OTA">--Select Your District--</option>
+                        <option value="ATAN-OTA">ATAN-OTA</option>
+                        <option value="IGBESA">IGBESA</option>
+                        <option value="ONIBUKU">ONIBUKU</option>
+                        <option value="LUSADA">LUSADA</option>
+                        <option value="ORE-AKINDE">ORE-AKINDE</option>
+                        <option value="IGBO-OLOMI">IGBO-OLOMI</option>
+                        <option value="ISEBOH">ISEBOH</option>
+                        <option value="IMOSEH">IMOSEH</option>
+                        <option value="OTHERS"> OTHERS</option>
+                    </select>
                 </div>
                 <div class="input-group-row">
+                    <label>SLEEPOVERS</label>
+                    <select id="sleepovers" size="1" multiple>
+                        <option value="FRIDAY">FRIDAY NIGHT</option>
+                        <option value="SATURDAY">SATURDAY NIGHT</option>
+                    </select>
                     <label >PAST EXPERIENCES OR EXPECTATIONS</label>
-                    <textarea id="expectations" placeholder="Share your testimonies from last year or your expectations for AOYC'26"></textarea>
+                    <textarea required id="expectations" placeholder="Share your testimonies from last year or your expectations for AOYC'26"></textarea>
                 </div>
                 <button type="submit" class="submit-btn">Complete Registration</button>
             </form>

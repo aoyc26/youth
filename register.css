@@ -16,7 +16,8 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
-    font-family: 'Plus Jakarta Sans', sans serif;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    
 }
 
 .reg-container {
@@ -32,6 +33,7 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: center;
     width: 100%;
     background: rgba(121,141,241,0.04);
     backdrop-filter: blur(12px);
@@ -52,6 +54,7 @@ body {
 .input-group-row {
     display: flex;
     flex-direction: column;
+    justify-content: center;
     gap: 6px;
     align-items: center;
     text-align: center;
@@ -63,7 +66,7 @@ body {
     font-weight: 600;
 }
 
-.input-group-row input {
+.input-group-row input, select {
     width: 100%;
     background: transparent;
     border: 1px solid var(--glass-border);
@@ -102,7 +105,7 @@ body {
     color: var(--accent-gold);
     font-size: 1.5rem;
     font-weight: 800;
-    margin-top: 20ox
+    margin-top: 20px
 }
 
 .submit-btn {
@@ -124,4 +127,9 @@ body {
     background: transparent;
     border: 1px solid var(--accent-gold);
     color: var(--accent-gold);
+}
+
+select {
+    width: 220px;
+    padding: 10px;
 }

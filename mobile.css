@@ -1,8 +1,4 @@
 :root {
-  --bg-dark-midnight: #05040d;
-  --bg-deep-blue: #0b0821;
-  --bg-gradient: radial-gradient(circle at top right, var(--bg-deep-blue) 0%, var(--bg-dark-midnight) 70%, #020105 100%);
-  
   --text-main: #f8fafc;
   --text-muted: #94a3b8;
   --border-glass: rgba(255, 255, 255, 0.08);
@@ -30,7 +26,15 @@ a {
 
 
 body {
-  background: var(--bg-gradient);
+  background:
+    radial-gradient(
+      circle at top right,
+      rgba(11,8,33,0.7),
+      rgba(5,4,13,0.95)
+    ),
+    url("church-bg.jpg");
+  background-size: cover;
+  background-position: center;
   color: var(--text-main);
   min-height: 100vh;
   overflow-x: hidden;
@@ -45,9 +49,9 @@ nav {
     justify-content: space-between;
     align-items: center;
     background-color: var(--glass-color);
-    backdrop-filter: blur(10px);
+    backdrop-filter: blur(18px);
     border: 1px solid var(--border-glass);
-    padding: 9px 15px;
+    padding: 12px 15px;
     z-index: 1000;
     box-shadow: 0 4px 30px rgba(0, 0, 0, 0.4), 0 1px 20px var(--accent-gold-glow);
 }
@@ -123,7 +127,7 @@ nav .navs ul li a {
     color: var(--text-muted);
     text-decoration: none;
     font-size: 0.85rem;
-    padding: 4px;
+    padding: 4px 15px;
     transition: color 0.3s ease;
 }
 
@@ -294,6 +298,11 @@ section .leaders-list .leader-card {
     background: var(--glass-color);
     border: 1px solid var(--border-glass);
     border-radius: 20px;
+    transition: .3s ease;
+}
+
+section .leaders-list .leader-card:hover {
+    transform: translateY(-8px);
 }
 
 section .leaders-list .leader-card .avatar-ring {

@@ -1,11 +1,10 @@
-const webAppUrl = "https://script.google.com/macros/s/AKfycbwoRLepzsdW-Rof7aunSp-oYJaXk8qiDxGFBeRFun4dXx9ligrZ2iMwhWesZmUojKvP/exec";
+const webAppUrl = "https://script.google.com/macros/s/AKfycbyDyRrZJRh-RFcQxClCVnN0ZDNVJCUKN3e_Cyf8vTp_syQFq_fQBLLvGAeW9UDfcRbG/exec";
 const adminNumber = "2349025739201";
 
 const regForm = document.querySelector(".register");
 const submitBtn = document.querySelector(".submit-btn");
 
 regForm.addEventListener("submit", async (e) => {
-
     e.preventDefault();
 
     submitBtn.disabled = true;
@@ -35,59 +34,44 @@ regForm.addEventListener("submit", async (e) => {
     };
 
     try {
-
-        const response = await fetch(webAppUrl, {
+        // Send request using no-cors to pass through Google's CORS redirect smoothly
+        await fetch(webAppUrl, {
             method: "POST",
+            mode: "no-cors",
             headers: {
-                "Content-Type": "application/json"
+                "Content-Type": "text/plain"
             },
             body: JSON.stringify(formData)
         });
 
-        const result = await response.json();
-
-        if (!result.success) {
-            throw new Error(result.message);
-        }
-
-        const message =
+        // WhatsApp message structure
+        const message = 
 `🙌 *NEW AOYC '26 REGISTRATION*
 
 👤 Name: ${formData.name}
-
 📞 Phone: ${formData.phone}
-
 📧 Email: ${formData.email}
-
 🏛 Assembly: ${formData.assembly}
-
 🌍 District: ${formData.district}
-
 🛏 Sleepovers: ${formData.sleepovers}
 
 💭 Expectations:
 ${formData.expectations}`;
+
+        alert("Registration Successful! WhatsApp will open now to notify us.");
 
         window.open(
             `https://wa.me/${adminNumber}?text=${encodeURIComponent(message)}`,
             "_blank"
         );
 
-        alert("Registration Successful!");
-
         regForm.reset();
 
     } catch (error) {
-
-        alert(error.message || "Registration failed.");
-
+        alert("Registration failed. Please check your internet connection and try again.");
         console.error(error);
-
     } finally {
-
         submitBtn.disabled = false;
         submitBtn.innerText = "Complete Registration";
-
     }
-
 });

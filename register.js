@@ -61,7 +61,7 @@ ${formData.expectations}`;
         alert("Registration Successful! WhatsApp will open now to notify us.");
 
         window.open(
-            `https://wa.me/${adminNumber}?text=${encodeURIComponent(message)}`,
+            `https://api.whatsapp.com/send?phone=${adminNumber}?text=${encodeURIComponent(message)}`,
             "_blank"
         );
 
